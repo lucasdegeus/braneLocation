@@ -38,6 +38,8 @@ def convert_location(locations: List[str], keys: List[str]) -> str:
                 result.append(country)
             else:
                 result.append(country)
+        else:
+            result.append('None')
     
     return result
 

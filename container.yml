@@ -1,0 +1,36 @@
+name: location
+version: 1.0.0
+kind: compute
+
+dependencies:
+  - python3
+  - python3-yaml
+  - python3-pip
+
+install:
+  - pip3 install geocoder
+
+files:
+  - run.py
+
+entrypoint:
+  kind: task
+  exec: run.py
+
+actions:
+  'convert_location':
+    command:
+      args:
+        - convert_location
+      capture: marked
+
+    input:
+      - type: string[]
+        name: locations
+
+      - type: string[]
+        name: keys
+
+    output:
+      - type: string[]
+        name: output

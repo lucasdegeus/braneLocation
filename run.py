@@ -6,10 +6,12 @@ import yaml
 import base64
 from typing import List
 
+## function that takes an array of locations and keys as input, output is a list of countries
 def convert_location(locations: List[str], keys: List[str]) -> str:
     key_use_counter = 0
     key_counter = 0
 
+    #these mappings convert geoNames countries to geoPandas countries
     mappings = {
     "Western Sahara" : "W. Sahara",
     "Congo Republic" : "Congo",
@@ -28,6 +30,7 @@ def convert_location(locations: List[str], keys: List[str]) -> str:
 
     result = []
 
+    #convert locations to countries and append to result array
     for x in locations:
         g = geocoder.geonames(x, key=keys[key_counter],featureClass='A')
         key_use_counter += 1
@@ -40,9 +43,9 @@ def convert_location(locations: List[str], keys: List[str]) -> str:
                 result.append(country)
         else:
             result.append('None')
-    
     return result
 
+# take location and key arrays from input
 if __name__ == "__main__":
     command = sys.argv[1]
     argument = [str(os.environ[f"LOCATIONS_{i}"]) for i in range(int(os.environ["LOCATIONS"]))]
